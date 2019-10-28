@@ -1,0 +1,411 @@
+Hello All
+
+This is a complete new post which I want to show you how to update lenovo BIOS setting using PowerShell script.
+
+These are the Lenovo WMI classes avilable to administer BIOS under the below namespace.
+
+Namespace: “\root\WMI”
+
+Lenovo
+
+Through WMI, you can configure BIOS settings in the following ways:
+• List BIOS settings
+• Change BIOS settings
+• Change the boot order
+• Load default BIOS settings
+• Change a BIOS password
+
+If you want to see current BIOS settings then you must use following class through Wbemtest/PowerShell script.
+
+Lenovo_BiosSetting
+
+Get-current BIOS setting through Powershell.
+
+gwmi -class Lenovo_BiosSetting -namespace root\wmi | ForEach-Object
+{if ($_.CurrentSetting -ne “”) {Write-Host $_.CurrentSetting.replace(“,”,” = “)}}
+
+Through following command you can change any settings if BIOS password is not set.
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“WakeOnLAN,Disable”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings()
+
+Otherwise you have to use following command if BIOS password is set.
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“WakeOnLAN,Disable,password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“password,ascii,us”)
+
+
+REPORT THIS AD
+
+Now we found which WMI class can be used to change BIOS however, in organizations you may aware that all models might be used in different locations with different BIOS passwords must be set. Therefore I have created a PowerShell script which contains all models with passwords.
+
+Complete PowerShell Script to disable AMT based on models:
+
+#Script START…
+
+#Please enter Model Specific password in all ‘Password’ fileds.
+
+#Determine the models.
+
+$model=Get-WmiObject -Namespace root\cimv2 -Class win32_COMPUTERSYSTEMPRODUCT
+
+#ThinkPad X200
+if($model.Version -like “*x200*”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,TypePassword,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“TypePassword,ascii,us”)
+}
+#Thinkpad x201
+if($model.Version -like “*x201*”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+
+#ThinkPad X230
+if($model.Version -eq “ThinkPad X230”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad X230 Tablets
+if($model.Version -eq “ThinkPad X230 Tablet”)
+{
+
+
+REPORT THIS AD
+
+REPORT THIS AD
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad X240
+if($model.Version -eq “ThinkPad X240”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T410
+if($model.Version -like “*t410*”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T431s
+if($model.Version -eq “ThinkPad T431s”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T440p
+if($model.Version -eq “ThinkPad T440p”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T410
+if($model.Version -like “*T410*”)
+{
+
+
+REPORT THIS AD
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T440s
+if($model.Version -eq “ThinkPad T440s”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T440
+if($model.Version -eq “ThinkPad T440”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T450s
+if($model.Version -eq “ThinkPad T450s”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T460p
+if($model.Version -eq “ThinkPad T460p”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T460s
+if($model.Version -eq “ThinkPad T460s”)
+{
+
+
+REPORT THIS AD
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T500
+if($model.Version -like “*T500*”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T530
+if($model.Version -like “*T530*”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T560
+if($model.Version -eq “ThinkPad T560”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+Else{Write-Host “Unknown model”}
+
+ 
+
+ 
+
+$model=Get-WmiObject -Namespace root\cimv2 -Class win32_COMPUTERSYSTEMPRODUCT
+
+
+REPORT THIS AD
+
+#ThinkPad X200
+if($model.Version -like “*x200*”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#Thinkpad x201
+if($model.Version -like “*x201*”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+
+#ThinkPad X230
+if($model.Version -eq “ThinkPad X230”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad X230 Tablets
+if($model.Version -eq “ThinkPad X230 Tablet”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad X240
+if($model.Version -eq “ThinkPad X240”)
+{
+
+
+REPORT THIS AD
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T410
+if($model.Version -like “*t410*”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T431s
+if($model.Version -eq “ThinkPad T431s”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T440p
+if($model.Version -eq “ThinkPad T440p”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T410
+if($model.Version -like “*T410*”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T440s
+if($model.Version -eq “ThinkPad T440s”)
+{
+
+
+REPORT THIS AD
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T440
+if($model.Version -eq “ThinkPad T440”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T450s
+if($model.Version -eq “ThinkPad T450s”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T460p
+if($model.Version -eq “ThinkPad T460p”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T460s
+if($model.Version -eq “ThinkPad T460s”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T500
+if($model.Version -like “*T500*”)
+{
+
+
+REPORT THIS AD
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T530
+if($model.Version -like “*T530*”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+#ThinkPad T560
+if($model.Version -eq “ThinkPad T560”)
+{
+
+ 
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“Password,ascii,us”)
+}
+Else{Write-Host “Unknown model”}
+
+ 
+
+#Script END…..
+
+If you have a single password for all models, use the following function.
+
+Function AMT-Off{
+
+param(
+
+[String] $Password
+)
+
+(gwmi -class Lenovo_SetBiosSetting –namespace root\wmi).SetBiosSetting(“AMTControl,Disable,$Password,ascii,us”)
+(gwmi -class Lenovo_SaveBiosSettings -namespace root\wmi).SaveBiosSettings(“$Password,ascii,us”)
+
+}
+
+AMT-Off -Password Password
