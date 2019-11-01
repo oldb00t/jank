@@ -1,20 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@oldb00t 
-76
-801211besimorhino/powercat
- Code Issues 5 Pull requests 2 Projects 0 Wiki Security Insights
-powercat/powercat.ps1
-@lukebaggett lukebaggett Resolves #10, #7
-4f23c3a on Aug 5, 2017
-@lukebaggett@kjacobsen
-949 lines (874 sloc)  36.8 KB
   
 function powercat
 {
@@ -958,15 +941,4 @@ Examples:
   }
   ########## EXECUTION ##########
 }
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
