@@ -12,7 +12,8 @@
 
 <script language="JScript">
 <![CDATA[
-
+	var rrr = "AAA"
+	var aa = rr
 	var rrrrrrrrr = new ActiveXObject("WScript.Shell").Run("calc.exe");
 	
 	
