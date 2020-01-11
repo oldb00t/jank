@@ -1,12 +1,5 @@
 <?XML version="1.0"?>
-<scriptlet>
-
-<registration
-    description="Bandit"
-    progid="Bandit"
-    version="1.00"
-    classid="{33453267-6633-8855-3478-6633FEEEECDC}"
-    remotable="true"
+<scriptlet><registration description="boo" progid="yaa" version="2.01" classid="{33453267-6633-8855-3478-6633FEEEECDC}" remotable="true"
 	>
 </registration>
 
@@ -20,4 +13,4 @@
 ]]>
 </script>
 
-</scriptlet
+</scriptlet>
